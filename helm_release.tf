@@ -3,9 +3,8 @@ resource "helm_release" "jenkins" {
   repository       = "https://charts.jenkins.io"
   chart            = "jenkins"
   version          = "3.11.3"
-  namespace        = "cicd"
+  namespace        = "jenkins"
   create_namespace = true
-  timeout          = 300
 
 
   values = [

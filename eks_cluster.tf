@@ -7,7 +7,7 @@ module "eks_cluster" {
   version = "18.25.0"
 
   cluster_name                    = local.cluster_name
-  cluster_version                 = "1.22"
+  cluster_version                 = var.cluster_version
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
@@ -17,8 +17,8 @@ module "eks_cluster" {
   enable_irsa = true
 
   eks_managed_node_group_defaults = {
-    ami_type       = "BOTTLEROCKET_x86_64"
-    instance_types = ["t2.micro", "t2.small"]
+    ami_type       = var.group_ami_type
+    instance_types = var.group_instance_type
 
     attach_cluster_primary_security_group = false
     vpc_security_group_ids                = [aws_security_group.allow-web-traffic.id]
@@ -26,13 +26,13 @@ module "eks_cluster" {
 
   eks_managed_node_groups = {
     jenkins = {
-      ami_type       = "BOTTLEROCKET_x86_64"
-      platform       = "bottlerocket"
-      instance_types = ["t2.small"]
-      desired_size   = 1
-      min_size       = 1
-      max_size       = 10
-      capacity_type  = "SPOT"
+      ami_type       = var.group_ami_type
+      platform       = var.group_platform_type
+      instance_types = [var.group_instance_type[1]]
+      desired_size   = var.group_desired_size
+      min_size       = var.group_min_size
+      max_size       = var.group_max_size
+      capacity_type  = var.group_capacity_type
       labels = {
         Name = "jenkins-${var.name}-${data.aws_region.current.name}"
       }
@@ -42,13 +42,13 @@ module "eks_cluster" {
     }
 
     emissary-ingress = {
-      ami_type       = "BOTTLEROCKET_x86_64"
-      platform       = "bottlerocket"
-      instance_types = ["t2.micro"]
-      desired_size   = 1
-      min_size       = 1
-      max_size       = 10
-      capacity_type  = "SPOT"
+      ami_type       = var.group_ami_type
+      platform       = var.group_platform_type
+      instance_types = [var.group_instance_type[0]]
+      desired_size   = var.group_desired_size
+      min_size       = var.group_min_size
+      max_size       = var.group_max_size
+      capacity_type  = var.group_capacity_type
       labels = {
         Name = "emissary-ingress-${var.name}-${data.aws_region.current.name}"
       }

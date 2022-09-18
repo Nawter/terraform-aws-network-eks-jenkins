@@ -39,6 +39,11 @@ variable "num_nat_gateways" {
   description = "The number of NAT Gateways required for the environment. For dev and test this should not be more than 1. For Production, this should equal the number of availability zones. Only appliable for VPCs with an internet gateway"
 }
 
+variable "cluster_version" {
+  type        = string
+  description = "The version of the EKS cluster."
+}
+
 variable "jenkins_admin_user" {
   type        = string
   description = "Admin user of the Jenkins Application."
@@ -49,3 +54,37 @@ variable "jenkins_admin_password" {
   description = "Admin password of the Jenkins Application."
 }
 
+variable "group_instance_type" {
+  type        = list(string)
+  description = "The instance type of the worker group nodes. Must be large enough to support the amount of NICS assigned to pods."
+}
+
+variable "group_ami_type" {
+  type        = string
+  description = "The ami type of the worker group nodes"
+}
+
+variable "group_platform_type" {
+  type        = string
+  description = "The platform type of the worker group nodes"
+}
+
+variable "group_min_size" {
+  type        = number
+  description = "The minimum number of nodes"
+}
+
+variable "group_desired_size" {
+  type        = number
+  description = "The desired number of nodes"
+}
+
+variable "group_max_size" {
+  type        = number
+  description = "The maximum number of nodes"
+}
+
+variable "group_capacity_type" {
+  type        = string
+  description = "The instance capacity type, it could be spot, on-demand or dedicated"
+}
