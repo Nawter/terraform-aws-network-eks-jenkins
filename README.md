@@ -20,8 +20,8 @@ because of namespace errors
  2. we try to deploy the resource emissary-ingress using different module, but there is a lot of an errors, one of the them is terraform can't find
 the url to download the yaml file
  3. Our last try is using helm directly without terraform and we succeeded in deploying the chart into kubernets, but when we 
-tried to change the file emissary_ingress_values_2nd_attempt.yaml, and make the deployment manually through the yaml file we couldn't finish it 
-because of errors.
+tried to change the file emissary_ingress_values_2nd_attempt.yaml, and make the deployment manually through the yaml file so we can make it work
+on the specific node we couldn't finish it because of errors in the helm command line tool.
 
 For the Jenkins Part we need to follow the next instructions:
 
