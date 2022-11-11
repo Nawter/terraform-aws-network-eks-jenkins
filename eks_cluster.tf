@@ -40,22 +40,7 @@ module "eks_cluster" {
         "Name" = "jenkins-${var.name}-${data.aws_region.current.name}"
       })
     }
-
-    emissary-ingress = {
-      ami_type       = var.group_ami_type
-      platform       = var.group_platform_type
-      instance_types = [var.group_instance_type[0]]
-      desired_size   = var.group_desired_size
-      min_size       = var.group_min_size
-      max_size       = var.group_max_size
-      capacity_type  = var.group_capacity_type
-      labels = {
-        Name = "emissary-ingress-${var.name}-${data.aws_region.current.name}"
-      }
-      tags = merge(var.tags, {
-        "Name" = "emissary-ingress-${var.name}-${data.aws_region.current.name}"
-      })
-    }
+  
   }
 
   tags = merge(var.tags, {
