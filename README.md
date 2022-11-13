@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Network Environment 
+=======
+# Network Environment Challenge
+>>>>>>> 2236f10c32a5025f45020f37085893ae79c624e0
 
 This module creates a networked environment consisting of two subnets for each Availability Zone, and places
 AWS services, NAT Gateway and Internet Gateway into the environment.
